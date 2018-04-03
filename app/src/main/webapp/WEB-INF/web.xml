@@ -1,0 +1,78 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+  <display-name>Archetype Created Web Application</display-name>
+
+    <servlet>
+	   <servlet-name>PersonListGwa</servlet-name>
+	   <servlet-class>PersonListGwa</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+	   <servlet-name>PersonListGwa</servlet-name>
+	   <url-pattern>/PersonListGwa</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+	   <servlet-name>PersonListLastName</servlet-name>
+	   <servlet-class>PersonListLastName</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+	   <servlet-name>PersonListLastName</servlet-name>
+	   <url-pattern>/PersonListLastName</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+	   <servlet-name>PersonListDateHired</servlet-name>
+	   <servlet-class>PersonListDateHired</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+	   <servlet-name>PersonListDateHired</servlet-name>
+	   <url-pattern>/PersonListDateHired</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+	   <servlet-name>AddPerson</servlet-name>
+	   <servlet-class>AddPerson</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+	   <servlet-name>AddPerson</servlet-name>
+	   <url-pattern>/AddPerson</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+	   <servlet-name>DeletePerson</servlet-name>
+	   <servlet-class>DeletePerson</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+	   <servlet-name>DeletePerson</servlet-name>
+	   <url-pattern>/DeletePerson</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+	   <servlet-name>PersonListUpdate</servlet-name>
+	   <servlet-class>PersonListUpdate</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+	   <servlet-name>PersonListUpdate</servlet-name>
+	   <url-pattern>/PersonListUpdate</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+	   <servlet-name>PersonListDelete</servlet-name>
+	   <servlet-class>PersonListDelete</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+	   <servlet-name>PersonListDelete</servlet-name>
+	   <url-pattern>/PersonListDelete</url-pattern>
+	</servlet-mapping>
+
+</web-app>
