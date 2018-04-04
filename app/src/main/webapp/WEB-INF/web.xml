@@ -6,33 +6,13 @@
   <display-name>Archetype Created Web Application</display-name>
 
     <servlet>
-	   <servlet-name>PersonListGwa</servlet-name>
-	   <servlet-class>PersonListGwa</servlet-class>
+	   <servlet-name>PersonOrderedList</servlet-name>
+	   <servlet-class>PersonOrderedList</servlet-class>
 	</servlet>
 
 	<servlet-mapping>
-	   <servlet-name>PersonListGwa</servlet-name>
-	   <url-pattern>/PersonListGwa</url-pattern>
-	</servlet-mapping>
-
-	<servlet>
-	   <servlet-name>PersonListLastName</servlet-name>
-	   <servlet-class>PersonListLastName</servlet-class>
-	</servlet>
-
-	<servlet-mapping>
-	   <servlet-name>PersonListLastName</servlet-name>
-	   <url-pattern>/PersonListLastName</url-pattern>
-	</servlet-mapping>
-
-	<servlet>
-	   <servlet-name>PersonListDateHired</servlet-name>
-	   <servlet-class>PersonListDateHired</servlet-class>
-	</servlet>
-
-	<servlet-mapping>
-	   <servlet-name>PersonListDateHired</servlet-name>
-	   <url-pattern>/PersonListDateHired</url-pattern>
+	   <servlet-name>PersonOrderedList</servlet-name>
+	   <url-pattern>/PersonOrderedList</url-pattern>
 	</servlet-mapping>
 
 	<servlet>
@@ -56,23 +36,134 @@
 	</servlet-mapping>
 
 	<servlet>
-	   <servlet-name>PersonListUpdate</servlet-name>
-	   <servlet-class>PersonListUpdate</servlet-class>
+	   <servlet-name>UpdatePerson</servlet-name>
+	   <servlet-class>UpdatePerson</servlet-class>
 	</servlet>
 
 	<servlet-mapping>
-	   <servlet-name>PersonListUpdate</servlet-name>
-	   <url-pattern>/PersonListUpdate</url-pattern>
+	   <servlet-name>UpdatePerson</servlet-name>
+	   <url-pattern>/UpdatePerson</url-pattern>
 	</servlet-mapping>
 
 	<servlet>
-	   <servlet-name>PersonListDelete</servlet-name>
-	   <servlet-class>PersonListDelete</servlet-class>
+	   <servlet-name>UpdatePersonView</servlet-name>
+	   <servlet-class>UpdatePersonView</servlet-class>
 	</servlet>
 
 	<servlet-mapping>
-	   <servlet-name>PersonListDelete</servlet-name>
-	   <url-pattern>/PersonListDelete</url-pattern>
+	   <servlet-name>UpdatePersonView</servlet-name>
+	   <url-pattern>/UpdatePersonView</url-pattern>
+	</servlet-mapping>
+
+
+	<servlet>
+	   <servlet-name>PersonList</servlet-name>
+	   <servlet-class>PersonList</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+	   <servlet-name>PersonList</servlet-name>
+	   <url-pattern>/PersonList</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+	   <servlet-name>ContactList</servlet-name>
+	   <servlet-class>ContactList</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+	   <servlet-name>ContactList</servlet-name>
+	   <url-pattern>/ContactList</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+	   <servlet-name>DeleteContact</servlet-name>
+	   <servlet-class>DeleteContact</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+	   <servlet-name>DeleteContact</servlet-name>
+	   <url-pattern>/DeleteContact</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+	   <servlet-name>AddContact</servlet-name>
+	   <servlet-class>AddContact</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+	   <servlet-name>AddContact</servlet-name>
+	   <url-pattern>/AddContact</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+	   <servlet-name>AddContactView</servlet-name>
+	   <servlet-class>AddContactView</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+	   <servlet-name>AddContactView</servlet-name>
+	   <url-pattern>/AddContactView</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+	   <servlet-name>UpdateContact</servlet-name>
+	   <servlet-class>UpdateContact</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+	   <servlet-name>UpdateContact</servlet-name>
+	   <url-pattern>/UpdateContact</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+	   <servlet-name>UpdateContactView</servlet-name>
+	   <servlet-class>UpdateContactView</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+	   <servlet-name>UpdateContactView</servlet-name>
+	   <url-pattern>/UpdateContactView</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+	   <servlet-name>AddRole</servlet-name>
+	   <servlet-class>AddRole</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+	   <servlet-name>AddRole</servlet-name>
+	   <url-pattern>/AddRole</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+	   <servlet-name>UpdateRole</servlet-name>
+	   <servlet-class>UpdateRole</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+	   <servlet-name>UpdateRole</servlet-name>
+	   <url-pattern>/UpdateRole</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+	   <servlet-name>UpdateRoleView</servlet-name>
+	   <servlet-class>UpdateRoleView</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+	   <servlet-name>UpdateRoleView</servlet-name>
+	   <url-pattern>/UpdateRoleView</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+	   <servlet-name>RoleList</servlet-name>
+	   <servlet-class>RoleList</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+	   <servlet-name>RoleList</servlet-name>
+	   <url-pattern>/RoleList</url-pattern>
 	</servlet-mapping>
 
 </web-app>

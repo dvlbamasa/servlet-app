@@ -4,9 +4,11 @@
     </head>
     <body>
     	Choose an option:<br/>
-      	<a href="addPerson.html">Add Person</a><br/>
-      	<a href="PersonListUpdate">Update Person</a><br/>
-      	<a href="PersonListDelete">Delete Person</a><br/>
-      	<a href="personList.html">List Persons</a><br/>
+      	<form action="PersonList" method="POST">
+          <button formaction="addPerson.html" type="submit">Add Person</button>
+          <input name="update_delete" type = "submit" value = "Delete Person" />
+          <input name="update_delete" type = "submit" value = "Update Person" />
+          <button formaction="personList.html" type="submit">List Person</button>
+        </form><br/>
     </body>
 </html>

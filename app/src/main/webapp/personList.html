@@ -4,8 +4,10 @@
     </head>
     <body>
     	Choose an option:<br/>
-      	<a href="PersonListGwa" method="post">GWA</a><br/>
-      	<a href="PersonListLastName" method="post">Last Name</a><br/>
-      	<a href="PersonListDateHired" method="post">Date Hired</a><br/>
+ 		<form action="PersonOrderedList" method="post">
+ 			<input name="order_type" type = "submit" value = "GWA" />
+ 			<input name="order_type" type = "submit" value = "Date Hired" />
+ 			<input name="order_type" type = "submit" value = "Last Name" />
+ 		</form><br/>
     </body>
 </html>

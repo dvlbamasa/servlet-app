@@ -1,29 +1,44 @@
-// Import required java libraries
 import java.io.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import java.util.List;
 import java.util.Collections;
 
-// Extend HttpServlet class
-public class PersonListLastName extends HttpServlet {
+public class PersonOrderedList extends HttpServlet {
 
    public void init() throws ServletException {
    }
 
-   // Method to handle GET method request.
    public void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
       
-      // Set response content type
+      String orderType = "";
       response.setContentType("text/html");
 
       PrintWriter out = response.getWriter();
-      String title = "List of Persons Ordered by Last Name";
+      
+      List<Person> persons = (List<Person>) Dao.getList("Person");
+
+      if (persons.isEmpty()) {
+         response.sendRedirect("noPersons.jsp");
+      }
+
       String docType =
          "<!doctype html public \"-//w3c//dtd html 4.0 " +
          "transitional//en\">\n";
-         
+      
+      if (request.getParameter("order_type").equals("GWA")) {
+         orderType = "gwa";
+      }
+      else if (request.getParameter("order_type").equals("Date Hired")) {
+         orderType = "date_hired";
+      }
+      else if (request.getParameter("order_type").equals("Last Name")) {
+         orderType = "last_name";
+      }
+
+      String title = "List of Persons Ordered by " + request.getParameter("order_type");
+
       out.println(docType +
          "<html>\n" +
             "<head><title>" + title + "</title>\n" + 
@@ -31,16 +46,33 @@ public class PersonListLastName extends HttpServlet {
             "</head>\n" +
             "<body>\n" +
                "<h3 align = \"center\">" + title + "</h3>\n" +
-               printPersonInfo() +
+               printPersonInfo(orderType, null) +
             "</body>" +
          "</html>"
       );
    }
 
-   public String printPersonInfo() {
-      List<Person> persons = (List<Person>) Dao.getOrderedList("Person", "name.lastName");
-
-      String table = "<table style=\"width:100\">\n" +
+   public static String printPersonInfo(String orderType, List<Person> contactList) {
+      List<Person> persons = null;
+      if (orderType.equals("gwa")) {
+         persons = (List<Person>) Dao.getList("Person");
+         Collections.sort(persons, (person1, person2) -> {
+            return Float.compare(person1.getGwa(), person2.getGwa());
+         });
+      }
+      else if (orderType.equals("date_hired")) {
+         persons = (List<Person>) Dao.getOrderedList("Person", "dateHired");
+      }
+      else if (orderType.equals("last_name")) {
+         persons = (List<Person>) Dao.getOrderedList("Person", "name.lastName");
+      }
+      else if (orderType.equals("contacts")) {
+         persons = contactList;
+      }
+      else {
+         persons = (List<Person>) Dao.getList("Person");
+      }
+      String table = "<table id=\"t01\">\n" +
                      "<tr>\n" +
                         "<th>Id</th>\n" +
                         "<th>First Name</th>\n" +                         
@@ -66,7 +98,7 @@ public class PersonListLastName extends HttpServlet {
       return table;
    }
 
-   public String getPersonInfo(Person person) {
+   public static String getPersonInfo(Person person) {
       String personInfo = "<tr>\n" +
                               "<td>" + person.getId() + "</td>\n" +
                               "<td>" + person.getName().getFirstName()+"</td>\n" +
@@ -81,15 +113,14 @@ public class PersonListLastName extends HttpServlet {
                               "<td>" + person.getAddress().getBarangay()+"</td>\n" +
                               "<td>" + person.getAddress().getMunicipality()+"</td>\n" +
                               "<td>" + person.getAddress().getZipCode()+"</td>\n" +
-                              "<td>" + person.getContactInformation().getLandline()+"</td>\n" +
-                              "<td>" + person.getContactInformation().getMobileNumber()+"</td>\n" +
-                              "<td>" + person.getContactInformation().getEmail()+"</td>\n" +
+                              "<td>" + ((person.getContactInformation() == null) ? "" : person.getContactInformation().getLandline()) +"</td>\n" +
+                              "<td>" + ((person.getContactInformation() == null) ? "" : person.getContactInformation().getMobileNumber()) +"</td>\n" +
+                              "<td>" + ((person.getContactInformation() == null) ? "" : person.getContactInformation().getEmail())+"</td>\n" +
                            "</tr>\n";
       return personInfo;
 
    }
 
-   // Method to handle POST method request.
    public void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 

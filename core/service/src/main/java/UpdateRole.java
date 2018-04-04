@@ -2,14 +2,15 @@ import java.io.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
-public class DeletePerson extends HttpServlet {
+public class UpdateRole extends HttpServlet {
 
    public void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
       
-      Person person = (Person) Dao.get(Integer.parseInt(request.getParameter("personId")), "Person");
-      Dao.delete(person);
-      response.sendRedirect("removeSuccessful.jsp");
+      Role role = (Role) Dao.get(Integer.parseInt(request.getParameter("id")), "Role");
+      role.setName(request.getParameter("role_name"));
+      Dao.update(role);
+      response.sendRedirect("addSuccessful.jsp");
    }
 
    public void doPost(HttpServletRequest request, HttpServletResponse response)
