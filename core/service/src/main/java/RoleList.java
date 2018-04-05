@@ -37,7 +37,7 @@ public class RoleList extends HttpServlet {
                   "Choose the role's id you want to " + updateList + ":<br/>" +
                   "<form action=\"UpdateRoleView\" method=\"GET\">\n" +
                   getRoleIdDropDown(roles) +
-                  "<button type=\"submit\">"+ request.getParameter("update_list") + "</button>\n") +
+                  "<button type=\"submit\">"+ request.getParameter("update_list") + "</button><br/><br/>\n") +
                "<a href=\"index.html\">Back to Homepage</a>" +
             "</body>" +
          "</html>"
@@ -57,7 +57,8 @@ public class RoleList extends HttpServlet {
       String table = "<table id=\"t01\">\n" +
                      "<tr>\n" +
                         "<th>Id</th>\n" +
-                        "<th>Role Name</th>\n" +                         
+                        "<th>Role Name</th>\n" + 
+                        "<th>Persons</th>\n" +  
                      "</tr>\n";
       for (Role role : roles) {
          table = table.concat(getRoleInfo(role));
@@ -66,13 +67,22 @@ public class RoleList extends HttpServlet {
       return table;
    }
 
+   public static String getPersonsRow(Role role) {
+      String persons = "<td>";
+      for (Person person : role.getPersons()) {
+         persons = persons.concat(" " + person.getName().getFirstName() + " " + person.getName().getLastName() + " ");
+      }
+      persons = persons.concat("<td/>\n");
+      return persons;
+   }
+
    public String getRoleInfo(Role role) {
       String roleInfo = "<tr>\n" +
                               "<td>" + role.getId() + "</td>\n" +
                               "<td>" + role.getName() + "</td>\n" +
+                              getPersonsRow(role) + 
                         "</tr>";
       return roleInfo;
-
    }
 
    public void doPost(HttpServletRequest request, HttpServletResponse response)

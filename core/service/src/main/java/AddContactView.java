@@ -29,7 +29,7 @@ public class AddContactView extends HttpServlet {
                     "Email Address:<br/>" +
                     "<input type = \"text\" name = \"email\" required/><br/><br/>" +  
                     
-                    "<input type = \"submit\" value = \"Submit\" />" +
+                    "<input type = \"submit\" value = \"Add Contact\" />" +
                "</form>" +
              "</body>" +
          "</html>");

@@ -28,13 +28,13 @@ public class UpdateContactView extends HttpServlet {
                     "Contact Information<br/><br/>" + 
                     "Landline:<br/>" + 
                     "<input type=\"hidden\" name=\"id\" value=\"" + request.getParameter("personId") + "\"/>" +
-                    "<input type = \"text\" name = \"landline\" value=\"" + contactInformation.getLandline() + "\"required/><br/>" + 
+                    "<input type = \"text\" name = \"landline\" value=\"" + contactInformation.getLandline() + "\" maxlength=\"20\" required/><br/>" + 
                     "Mobile Number:<br/>" +
-                    "<input type = \"text\" name = \"mobile_number\"  value=\"" + contactInformation.getMobileNumber() + "\" required/><br/>" +
+                    "<input type = \"text\" name = \"mobile_number\"  value=\"" + contactInformation.getMobileNumber() + "\" maxlength=\"20\" required/><br/>" +
                     "Email Address:<br/>" +
-                    "<input type = \"text\" name = \"email\"  value=\"" + contactInformation.getEmail() + "\" required/><br/><br/>" +  
+                    "<input type = \"text\" name = \"email\"  value=\"" + contactInformation.getEmail() + "\" maxlength=\"30\" required/><br/><br/>" +  
                     
-                    "<input type = \"submit\" value = \"Submit\" />" +
+                    "<input type = \"submit\" value = \"Update Contact\" />" +
                "</form>" +
              "</body>" +
          "</html>");

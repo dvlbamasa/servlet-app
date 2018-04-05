@@ -43,7 +43,7 @@ public class PersonList extends HttpServlet {
                "Choose the person's id you want to " + updateDelete + ":<br/>" +
                "<form action=\"" + (updateDelete.equals("delete") ? "DeletePerson" : "UpdatePersonView") + "\" method=\"GET\">\n" +
                getPersonIdDropDown(persons) +
-               "<button type=\"submit\">"+ request.getParameter("update_delete") + "</button>\n"+
+               "<button type=\"submit\">"+ request.getParameter("update_delete") + "</button><br/><br/>\n"+
                "</form>\n" +
                "<a href=\"index.html\">Back to Homepage</a>" +
             "</body>" +

@@ -2,6 +2,8 @@ import java.io.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import java.util.List;
+import java.util.Set;
+import java.util.Iterator;
 
 public class UpdateRoleView extends HttpServlet {
 
@@ -24,20 +26,28 @@ public class UpdateRoleView extends HttpServlet {
                     "Contact Information<br/><br/>" + 
                     "Role Name:<br/>" + 
                     "<input type=\"hidden\" name=\"id\" value=\"" + request.getParameter("roleId") + "\"/>" +
-                    "<input type = \"text\" name = \"role_name\" value=\"" + role.getName() + "\"required/><br/><br/>" + 
-                    "Check the Persons you want to add to this role:<br/>" +
-                    getPersonsCheckBox(persons) +
-
-                    "<input type = \"submit\" value = \"Submit\" />" +
+                    "<input type = \"text\" name = \"role_name\" value=\"" + role.getName() + "\" maxlength=\"20\" required/><br/><br/>" + 
+                    (persons.size() == 0 ? "" :  getPersonsCheckBox(persons, role)) +
+                    "<input type = \"submit\" value = \"Update Role\" />" +
                "</form>" +
              "</body>" +
          "</html>");
    }
 
-   public String getPersonsCheckBox(List<Person> persons) {
-      String personList = "";
+   public String getPersonsCheckBox(List<Person> persons, Role role) {
+      String personList = "Check the Persons you want to add to this role:<br/>";
+      boolean checked = false;
       for (Person person : persons) {
-          personList = personList.concat("<input type=\"checkbox\" name=\"" + person.getId() +"\"/>" + person.getName().getFirstName() + " " + person.getName().getLastName());
+          checked = false;
+          Set<Person> setPersons = role.getPersons();
+          Iterator<Person> iterator = setPersons.iterator();
+          while (iterator.hasNext()) {
+              Person setPerson = iterator.next();
+              if (setPerson.getId() == person.getId()) {
+                  checked = true;
+              }
+          }
+          personList = personList.concat("<input type=\"checkbox\" name=\"persons\" value=\"" + person.getId() +"\" " + (checked ? "checked" : "") + " />" + person.getName().getFirstName() + " " + person.getName().getLastName() + "<br/>");
       }
       personList = personList.concat("<br/><br/>");
       return personList;
