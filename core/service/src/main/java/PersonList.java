@@ -3,7 +3,9 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import java.util.List;
 import java.util.Collections;
+import javax.servlet.annotation.WebServlet;
 
+@WebServlet("/PersonList")
 public class PersonList extends HttpServlet {
 
    public void init() throws ServletException {
@@ -15,18 +17,11 @@ public class PersonList extends HttpServlet {
       response.setContentType("text/html");
 
       PrintWriter out = response.getWriter();
-      String title = "List of Persons";
+      String title = "Person";
       String docType =
          "<!doctype html public \"-//w3c//dtd html 4.0 " +
          "transitional//en\">\n";
       List<Person> persons = (List<Person>) Dao.getList("Person");
-      String updateDelete = "";
-      if (request.getParameter("update_delete").equals("Delete Person")) {
-         updateDelete = "delete";
-      }
-      else if (request.getParameter("update_delete").equals("Update Person")) {
-         updateDelete = "update";
-      }
 
       if (persons.isEmpty()) {
          response.sendRedirect("noPersons.jsp");
@@ -38,13 +33,11 @@ public class PersonList extends HttpServlet {
             "<link rel=\"stylesheet\" href=\"style.css\">\n" +
             "</head>\n" +
             "<body>\n" +
-               "<h3 align = \"center\">" + title + "</h3>\n" +
-               PersonOrderedList.printPersonInfo("none", null) + "<br/><br/>" +
-               "Choose the person's id you want to " + updateDelete + ":<br/>" +
-               "<form action=\"" + (updateDelete.equals("delete") ? "DeletePerson" : "UpdatePersonView") + "\" method=\"GET\">\n" +
-               getPersonIdDropDown(persons) +
-               "<button type=\"submit\">"+ request.getParameter("update_delete") + "</button><br/><br/>\n"+
-               "</form>\n" +
+               "<h1>" + title + "</h1><br/>\n" +
+               "<h2>List of Persons</h2>\n" +
+               getOrderTypeDropDown() +
+               PersonOrderedList.printPersonInfo("none") + "<br/>" +
+               "<form action=\"AddPersonView\"><button type=\"submit\">Add Person</button></form><br/><br/>" +
                "<a href=\"index.html\">Back to Homepage</a>" +
             "</body>" +
          "</html>"
@@ -52,18 +45,16 @@ public class PersonList extends HttpServlet {
       }
    }
 
-   public String getPersonIdDropDown(List<Person> persons) {
-      String dropDown = "<select id=\"personId\" name=\"personId\">\n";
-      for(Person person : persons) {
-            dropDown = dropDown.concat("<option value=\"" + person.getId() + "\">" + person.getId() + "</option>\n");
-      }
-      dropDown = dropDown.concat("</select>");
+   public static String getOrderTypeDropDown() {
+      String dropDown = "Pick Order:<br/>" +
+                        "<form action=\"PersonOrderedList\" method=\"GET\">\n" +
+                           "<select id=\"order_type\" name=\"order_type\">\n" +
+                              "<option value=\"GWA\">GWA</option>\n" +
+                              "<option value=\"Date Hired\">Date Hired</option>\n" +
+                              "<option value=\"Last Name\">Last Name</option>\n" +
+                           "</select>\n" +
+                           "<button type=\"submit\">Select</button><br/><br/>\n"+
+                        "</form>\n";
       return dropDown;
-   }
-
-   public void doPost(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
-
-      doGet(request, response);
    }
 }

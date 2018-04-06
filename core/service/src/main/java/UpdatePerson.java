@@ -6,14 +6,16 @@ import java.time.LocalDate;
 import java.util.Locale;
 import java.util.Set;
 import java.util.HashSet;
+import javax.servlet.annotation.WebServlet;
 
+@WebServlet("/UpdatePerson")
 public class UpdatePerson extends HttpServlet {
 
    private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.ENGLISH);
 
    public void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-      
+
       if (!Util.validateInputDate(request.getParameter("birthday"))) {
          promptError("Birthday", request, response, "/UpdatePersonView");
       } 
@@ -62,12 +64,11 @@ public class UpdatePerson extends HttpServlet {
             person.getRoles().clear();
          }
          Dao.update(person);
-         promptSuccess(request, response, "/PersonOrderedList");  
+         promptSuccess(request, response, "/PersonList");  
       }
-      
    }
 
-  public void promptError(String property, HttpServletRequest request, HttpServletResponse response, String url) throws ServletException, IOException{
+   public void promptError(String property, HttpServletRequest request, HttpServletResponse response, String url) throws ServletException, IOException{
       PrintWriter out= response.getWriter();
       RequestDispatcher rd = getServletContext().getRequestDispatcher(url);
       out.println("<font color=red>Invalid " + property + " Input! Please try again.</font><br/>");
@@ -77,13 +78,7 @@ public class UpdatePerson extends HttpServlet {
    public void promptSuccess(HttpServletRequest request, HttpServletResponse response, String url) throws ServletException, IOException{
       PrintWriter out= response.getWriter();
       RequestDispatcher rd = request.getRequestDispatcher(url);
-      out.println("<font color=green>Successfully Updated a Person!</font><br/>");
+      out.println("Successfully Updated a Person!</font><br/>");
       rd.forward(request, response);
-   }
-
-   public void doPost(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
-
-      doGet(request, response);
    }
 }

@@ -2,23 +2,19 @@ import java.io.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import java.util.List;
-import java.util.Collections;
 import javax.servlet.annotation.WebServlet;
 
-@WebServlet("/RoleList")
-public class RoleList extends HttpServlet {
-
-   public void init() throws ServletException {
-   }
+@WebServlet("/AddPersonView")
+public class AddPersonView extends HttpServlet {
 
    public void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-      List<Role> roles = (List<Role>) Dao.getList("Role");   
-      String title = "Role";
+      String title = "Add Person";
+      List<Role> roles = (List<Role>) Dao.getList("Role");
+      
       request.setAttribute("roles", roles);
       request.setAttribute("title", title);
-      request.getRequestDispatcher("listRoles.jsp").forward(request, response);
-
+      request.getRequestDispatcher("addPerson.jsp").forward(request, response);
    }
 }

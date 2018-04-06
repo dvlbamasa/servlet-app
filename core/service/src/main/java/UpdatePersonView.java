@@ -3,8 +3,10 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import java.util.List;
 import java.util.Set;
+import javax.servlet.annotation.WebServlet;
 import java.util.Iterator;
 
+@WebServlet("/UpdatePersonView")
 public class UpdatePersonView extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -13,7 +15,6 @@ public class UpdatePersonView extends HttpServlet {
       response.setContentType("text/html");
 
       PrintWriter out = response.getWriter();
-      String title = "List of Persons";
       String docType =
          "<!doctype html public \"-//w3c//dtd html 4.0 " +
          "transitional//en\">\n";
@@ -23,9 +24,13 @@ public class UpdatePersonView extends HttpServlet {
 
       out.println(docType + 
          "<html>\n" +
+            "<head>\n" +
+              "<title>Update Person</title>\n" +
+            "</head>\n" +
             "<body>\n" + 
+               "<h1>Update Person</h1><br/>"+
                "Please Fill out the New Contact Information Form: <br/><br/>\n" + 
-                  "<form action = \"UpdatePerson\" method = \"POST\">\n" +
+                  "<form action = \"UpdatePerson\" method = \"GET\">\n" +
                   "<input type=\"hidden\" name=\"id\" value=\"" + request.getParameter("personId") + "\"/>" +
                   "First Name:<br/>" + 
                     "<input type = \"text\" name = \"first_name\" value=\"" + person.getName().getFirstName() +"\" maxlength=\"20\" required><br/> " +
@@ -88,10 +93,5 @@ public class UpdatePersonView extends HttpServlet {
       }
       roleList = roleList.concat("<br/><br/>");
       return roleList;
-    }
-
-    public void doPost(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
-      doGet(request, response);
     }
 }

@@ -4,7 +4,9 @@ import javax.servlet.http.*;
 import java.util.List;
 import java.util.Set;
 import java.util.Iterator;
+import javax.servlet.annotation.WebServlet;
 
+@WebServlet("/UpdateRoleView")
 public class UpdateRoleView extends HttpServlet {
 
    public void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -20,10 +22,13 @@ public class UpdateRoleView extends HttpServlet {
       List<Person> persons =  (List<Person>) Dao.getList("Person");
       out.println(docType + 
          "<html>\n" +
+            "<head>\n" +
+              "<title>Update Role</title>\n" +
+            "</head>\n" +
             "<body>\n" + 
+               "<h1>Update Role</h1><br/>"+
                "Please Update the Role Information Form: <br/><br/>\n" + 
                   "<form action = \"UpdateRole\" method = \"POST\">\n" +
-                    "Contact Information<br/><br/>" + 
                     "Role Name:<br/>" + 
                     "<input type=\"hidden\" name=\"id\" value=\"" + request.getParameter("roleId") + "\"/>" +
                     "<input type = \"text\" name = \"role_name\" value=\"" + role.getName() + "\" maxlength=\"20\" required/><br/><br/>" + 
@@ -52,10 +57,4 @@ public class UpdateRoleView extends HttpServlet {
       personList = personList.concat("<br/><br/>");
       return personList;
     }
-
-   public void doPost(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
-
-      doGet(request, response);
-   }
 }

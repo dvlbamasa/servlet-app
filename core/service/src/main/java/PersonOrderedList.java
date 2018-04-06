@@ -3,11 +3,10 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import java.util.List;
 import java.util.Collections;
+import javax.servlet.annotation.WebServlet;
 
+@WebServlet("/PersonOrderedList")
 public class PersonOrderedList extends HttpServlet {
-
-   public void init() throws ServletException {
-   }
 
    public void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
@@ -47,19 +46,22 @@ public class PersonOrderedList extends HttpServlet {
 
       out.println(docType +
          "<html>\n" +
-            "<head><title>" + title + "</title>\n" + 
+            "<head><title>Person</title>\n" + 
             "<link rel=\"stylesheet\" href=\"style.css\">\n" +
             "</head>\n" +
             "<body>\n" +
-               "<h3 align = \"center\">" + title + "</h3>\n" +
-               printPersonInfo(orderType, null) +
+               "<h1>Person</h1><br/>\n" +
+               "<h2>" + title + "</h2>\n" +
+               PersonList.getOrderTypeDropDown() + 
+               printPersonInfo(orderType) + "<br/>" +
+               "<form action=\"AddPersonView\"><button type=\"submit\">Add Person</button></form><br/><br/>" +
+               "<a href=\"index.html\">Back to Homepage</a>" +
             "</body>" +
-            "<a href=\"index.html\">Back to Homepage</a>" +
          "</html>"
       );
    }
 
-   public static String printPersonInfo(String orderType, List<Person> contactList) {
+   public static String printPersonInfo(String orderType) {
       List<Person> persons = null;
       if (orderType.equals("gwa")) {
          persons = (List<Person>) Dao.getList("Person");
@@ -73,14 +75,12 @@ public class PersonOrderedList extends HttpServlet {
       else if (orderType.equals("last_name")) {
          persons = (List<Person>) Dao.getOrderedList("Person", "name.lastName");
       }
-      else if (orderType.equals("contacts")) {
-         persons = contactList;
-      }
       else {
          persons = (List<Person>) Dao.getList("Person");
       }
-      String table = "<form action=\"UpdatePersonView\" method=\"POST\"><table id=\"t01\">\n" +
+      String table = "<table id=\"t01\">\n" +
                      "<tr>\n" +
+                        "<th>Operation</th>\n" +
                         "<th>Id</th>\n" +
                         "<th>First Name</th>\n" +                         
                         "<th>Middle Name</th>\n" +
@@ -100,14 +100,27 @@ public class PersonOrderedList extends HttpServlet {
                         "<th>Roles</th>\n" +
                      "</tr>\n";
       for(Person person : persons) {
-            table = table.concat(getPersonInfo(person));
+            table = table.concat(getPersonInfo(person, orderType));
       }
-      table = table.concat("</table></form>");
+      table = table.concat("</table>");
       return table;
    }
 
-   public static String getPersonInfo(Person person) {
+   public static String getPersonInfo(Person person, String orderType) {
       String personInfo = "<tr>\n" +
+                              (orderType.equals("contacts") ? 
+                                 (person.getContactInformation() == null ? 
+                                    "<td>" + 
+                                       "<a href=\"AddContactView?personId="+ person.getId() +"\" >Add_Contact</a><br/>"+ 
+                                    "</td>\n" : 
+                                    "<td>" + 
+                                       "<a href=\"UpdateContactView?personId="+ person.getId() +"\" >Update_Contact</a><br/>"+
+                                       "<a href=\"DeleteContact?personId="+ person.getId() +"\" >Delete_Contact</a><br/>"+ 
+                                    "</td>\n") :
+                                 "<td>" + 
+                                    "<a href=\"UpdatePersonView?personId="+ person.getId() +"\" >Update</a><br/>"+ 
+                                    "<a href=\"DeletePerson?personId="+ person.getId() +"\" >Delete</a>"+ 
+                                 "</td>\n") +
                               "<td>" + person.getId() + "</td>\n" +
                               "<td>" + person.getName().getFirstName()+"</td>\n" +
                               "<td>" + person.getName().getMiddleName()+"</td>\n" +
@@ -134,13 +147,7 @@ public class PersonOrderedList extends HttpServlet {
       for (Role role : person.getRoles()) {
          roles = roles.concat(" " + role.getName() + " ");
       }
-      roles = roles.concat("<td/>\n");
+      roles = roles.concat("</td>\n");
       return roles;
-   }
-
-   public void doPost(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
-
-      doGet(request, response);
    }
 }

@@ -1,19 +1,26 @@
-<%@ page import="src.main.java.Person, Role, java.util.List"%>
-<html>
+<%@ page language="java" contentType="text/html; charset=US-ASCII"
+    pageEncoding="US-ASCII"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>	
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+  <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+    <head>
+        <title><c:out value="${title}"></c:out></title> 
+        <link rel="stylesheet" href="style.css">
+    </head>
     <body>
-    	Please Fill out the Role Information Form: <br/><br/>
+        <h1><c:out value="${title}"></c:out></h1><br/>
+      	Please Fill out the Role Information Form: <br/><br/>
       	<form action = "AddRole" method = "POST">
 	        Role Name:<br/>
-	        <input type = "text" name = "role_name" required><br/> 
-	        <%
-	        	List<Person> persons =  (List<Person>) Dao.getList("Person");
-	        	String personList = "";
-			    for (Person person : persons) {
-		    	    personList = personList.concat("<input type=\"checkbox\" name=\"persons\" value=\"" + person.getId() +"\"/>" + person.getName().getFirstName() + " " + person.getName().getLastName() + "<br/>");
-			    }
-			    personList = personList.concat("<br/><br/>");	
-			    out.println(personList);
-	        %>
+	        <input type = "text" name = "role_name" value=""required><br/><br/>
+          <c:if test="${fn:length(requestScope.persons) > 0}">
+            Check the Persons you want to add to this role:<br/>
+            <c:forEach items="${requestScope.persons}" var="person">
+              <input type="checkbox" name="personsCheckBox" value="<c:out value='${person.id}'/>"/><c:out value="${person.name.firstName }"/> <c:out value="${person.name.lastName}"/><br/>
+            </c:forEach>
+          </c:if>
+          <br/>
 	        <input type = "submit" value = "Add Role" />
      	</form>
     </body>
