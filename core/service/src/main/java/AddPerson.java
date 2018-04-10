@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.HashSet;
 import javax.servlet.annotation.WebServlet;
 
-@WebServlet("/AddPerson")
+@WebServlet("/addPerson")
 public class AddPerson extends HttpServlet {
 
    private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.ENGLISH);
@@ -18,16 +18,16 @@ public class AddPerson extends HttpServlet {
       throws ServletException, IOException {
 
       if (!Util.validateInputDate(request.getParameter("birthday"))) {
-         promptError("Birthday", request, response, "/addPerson.jsp");
+         Service.promptError("Birthday", request, response, "Add Person", getServletContext().getRequestDispatcher("/addPerson.jsp"));
       } 
       else if (!Util.validateInputInt(request.getParameter("street_no"))) {
-         promptError("Street Number", request, response, "/addPerson.jsp");
+         Service.promptError("Street Number", request, response, "Add Person", getServletContext().getRequestDispatcher("/addPerson.jsp"));
       }
       else if (!Util.validateInputInt(request.getParameter("zip_code"))) {
-         promptError("Zip Code", request, response, "/addPerson.jsp");
+         Service.promptError("Zip Code", request, response, "Add Person", getServletContext().getRequestDispatcher("/addPerson.jsp"));
       }
       else if (!Util.validateInputDate(request.getParameter("date_hired"))) {
-         promptError("Date Hired", request, response, "/addPerson.jsp");
+         Service.promptError("Date Hired", request, response, "Add Person", getServletContext().getRequestDispatcher("/addPerson.jsp"));
       }
       else {
          response.setContentType("text/html");
@@ -57,19 +57,8 @@ public class AddPerson extends HttpServlet {
 
          Dao.create(person);
          person.setRoles(roles);
-         response.sendRedirect("PersonList");
+         Service.promptSuccess(request, response, "/listPersons.jsp", "Added", "Person");
       }
 
-   }
-
-   public void promptError(String property, HttpServletRequest request, HttpServletResponse response, String url) throws ServletException, IOException{
-      PrintWriter out= response.getWriter();
-      RequestDispatcher rd = getServletContext().getRequestDispatcher(url);
-      List<Role> roles = (List<Role>) Dao.getList("Role");
-      String title = "Add Person";
-      request.setAttribute("roles", roles);
-      request.setAttribute("title", title);
-      out.println("<font color=red>Invalid " + property + " Input! Please try again.</font><br/>");
-      rd.include(request, response);
    }
 }

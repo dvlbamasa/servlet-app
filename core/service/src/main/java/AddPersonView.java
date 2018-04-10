@@ -4,7 +4,7 @@ import javax.servlet.http.*;
 import java.util.List;
 import javax.servlet.annotation.WebServlet;
 
-@WebServlet("/AddPersonView")
+@WebServlet("/addPersonView")
 public class AddPersonView extends HttpServlet {
 
    public void doGet(HttpServletRequest request, HttpServletResponse response)

@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.util.Locale;
 import javax.servlet.annotation.WebServlet;
 
-@WebServlet("/UpdateContactView")
+@WebServlet("/updateContactView")
 public class UpdateContactView extends HttpServlet {
 
    public void doGet(HttpServletRequest request, HttpServletResponse response)

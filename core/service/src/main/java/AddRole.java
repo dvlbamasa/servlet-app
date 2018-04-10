@@ -3,7 +3,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.WebServlet;
 
-@WebServlet("/AddRole")
+@WebServlet("/addRole")
 public class AddRole extends HttpServlet {
 
    public void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -19,6 +19,6 @@ public class AddRole extends HttpServlet {
             Dao.update(person);
          } 
       }
-      UpdateRole.promptSuccess(request, response, "/listRoles.jsp", "Added"); 
+      Service.promptSuccess(request, response, "/listRoles.jsp", "Added", "Role");
    }
 }

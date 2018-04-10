@@ -9,7 +9,7 @@
 	<body>
 		<h3>Sorry but there are no Person on the Database.</h3>
 		<h4>Add a new Person first:</h4>
-		<form action="AddPersonView">
+		<form action="addPersonView">
 			<button type="submit">Add Person</button>
 		</form><br/><br/>
 		<a href="index.html">Back to Homepage</a>

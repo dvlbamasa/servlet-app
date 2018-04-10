@@ -11,17 +11,24 @@
     <body>
         <h1><c:out value="${title}"></c:out></h1><br/>
       	Please Fill out the Role Information Form: <br/><br/>
-      	<form action = "addRole" method = "POST">
+      	<form action = "updateRole" method = "POST">
+          <input type="hidden" name="id" value="<c:out value='${role.id}'/>"/>
 	        Role Name:<br/>
-	        <input type = "text" name = "role_name" value=""required><br/><br/>
+	        <input type = "text" name = "role_name" value="<c:out value='${role.name}'/>" required><br/><br/>
           <c:if test="${fn:length(requestScope.persons) > 0}">
             Check the Persons you want to add to this role:<br/>
             <c:forEach items="${requestScope.persons}" var="person">
-              <input type="checkbox" name="personsCheckBox" value="<c:out value='${person.id}'/>"/><c:out value="${person.name.firstName }"/> <c:out value="${person.name.lastName}"/><br/>
+              <input type="checkbox" name="personsCheckBox" value="<c:out value='${person.id}'/>" 
+                <c:forEach items="${checkedBox}" var="checked">
+                  <c:if test="${person.id == checked}">
+                    checked
+                  </c:if>
+                </c:forEach>
+              /><c:out value="${person.name.firstName }"/> <c:out value="${person.name.lastName}"/><br/>
             </c:forEach>
           </c:if>
           <br/>
-	        <input type = "submit" value = "Add Role" />
+	        <input type = "submit" value = "Update Role" />
      	</form>
     </body>
 </html>

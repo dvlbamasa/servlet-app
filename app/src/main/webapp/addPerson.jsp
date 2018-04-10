@@ -10,7 +10,7 @@
     <body>
     	<h1><c:out value="${title}"></c:out></h1><br/>
     	Please Fill out the Person Information Form: <br/><br/>
-      	<form action = "AddPerson" method = "POST">
+      	<form action = "addPerson" method = "POST">
 	        First Name:<br/>
 	        <input type = "text" name = "first_name" maxlength="20" required><br/> 
 	        Middle Name:<br/> 

@@ -4,7 +4,7 @@ import javax.servlet.http.*;
 import java.util.List;
 import javax.servlet.annotation.WebServlet;
 
-@WebServlet("/AddRoleView")
+@WebServlet("/addRoleView")
 public class AddRoleView extends HttpServlet {
 
    public void doGet(HttpServletRequest request, HttpServletResponse response)

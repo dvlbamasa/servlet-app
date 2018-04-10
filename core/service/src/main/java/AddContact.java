@@ -2,8 +2,9 @@ import java.io.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.WebServlet;
+import java.util.List;
 
-@WebServlet("/AddContact")
+@WebServlet("/addContact")
 public class AddContact extends HttpServlet {
 
    public void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -14,6 +15,6 @@ public class AddContact extends HttpServlet {
       person.setContactInformation(personContactInformation);
       personContactInformation.setPerson(person);
       Dao.update(person);
-      response.sendRedirect("ContactList");
+      Service.promptSuccess(request, response, "/listPersons.jsp", "Added", "Contact Information");
    }
 }

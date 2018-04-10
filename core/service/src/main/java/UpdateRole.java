@@ -6,14 +6,14 @@ import java.util.List;
 import java.util.Iterator;
 import javax.servlet.annotation.WebServlet;
 
-@WebServlet("/UpdateRole")
+@WebServlet("/updateRole")
 public class UpdateRole extends HttpServlet {
 
    public void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
       Role role = (Role) Dao.get(Integer.parseInt(request.getParameter("id")), "Role");
-      String[] checkedPersons = request.getParameterValues("persons");
+      String[] checkedPersons = request.getParameterValues("personsCheckBox");
       boolean exists = false;
       for (Person person : role.getPersons()) {
          Set<Role> setRoles = person.getRoles();
@@ -35,18 +35,6 @@ public class UpdateRole extends HttpServlet {
             Dao.update(person);
          } 
       }
-      promptSuccess(request, response, "/listRoles.jsp", "Updated"); 
-   }
-      
-   public static void promptSuccess(HttpServletRequest request, HttpServletResponse response, String url, String operation) throws ServletException, IOException{
-      PrintWriter out= response.getWriter();
-      RequestDispatcher rd = request.getRequestDispatcher(url);        
-      String prompt = "Successfully " + operation + " a Role!";
-      List<Role> roles = (List<Role>) Dao.getList("Role");   
-      String title = "Role";
-      request.setAttribute("roles", roles);
-      request.setAttribute("title", title);
-      request.setAttribute("prompt", prompt);
-      rd.forward(request, response);
+      Service.promptSuccess(request, response, "/listRoles.jsp", "Updated", "Role");
    }
 }

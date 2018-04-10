@@ -3,7 +3,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.WebServlet;
 
-@WebServlet("/DeleteContact")
+@WebServlet("/deleteContact")
 public class DeleteContact extends HttpServlet {
 
    	public void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -13,7 +13,6 @@ public class DeleteContact extends HttpServlet {
 		ContactInformation contactInformation = person.getContactInformation();
 		Dao.delete(contactInformation);
 		person.setContactInformation(null);
-		response.sendRedirect("ContactList");
+		Service.promptSuccess(request, response,"/listPersons.jsp", "Deleted", "Contact Information");
     }
-
 }

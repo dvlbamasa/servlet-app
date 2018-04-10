@@ -10,7 +10,7 @@
     <body> 
         <h1><c:out value="${title}"></c:out></h1><br/>
         Please Fill out the Contact Information Form: <br/><br/> 
-        <form action = "UpdateContact" method = "POST">
+        <form action = "updateContact" method = "POST">
             Contact Information<br/><br/> 
             Landline:<br/> 
             <input type="hidden" name="id" value="<c:out value='${personId}'/>"/>

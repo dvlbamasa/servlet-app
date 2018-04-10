@@ -8,7 +8,7 @@ import java.util.Set;
 import java.util.HashSet;
 import javax.servlet.annotation.WebServlet;
 
-@WebServlet("/UpdatePerson")
+@WebServlet("/updatePerson")
 public class UpdatePerson extends HttpServlet {
 
    private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.ENGLISH);
@@ -17,16 +17,16 @@ public class UpdatePerson extends HttpServlet {
       throws ServletException, IOException {
 
       if (!Util.validateInputDate(request.getParameter("birthday"))) {
-         promptError("Birthday", request, response, "/UpdatePersonView");
+         Service.promptError("Birthday", request, response, "Update Person", getServletContext().getRequestDispatcher("/updatePerson.jsp"));
       } 
       else if (!Util.validateInputDate(request.getParameter("date_hired"))) {
-         promptError("Date Hired", request, response, "/UpdatePersonView");
+         Service.promptError("Date Hired", request, response, "Update Person", getServletContext().getRequestDispatcher("/updatePerson.jsp"));
       }
       else if (!Util.validateInputInt(request.getParameter("street_no"))) {
-         promptError("Street Number", request, response, "/UpdatePersonView");
+         Service.promptError("Street Number", request, response, "Update Person", getServletContext().getRequestDispatcher("/updatePerson.jsp"));
       }
       else if (!Util.validateInputInt(request.getParameter("zip_code"))) {
-         promptError("Zip Code", request, response, "/UpdatePersonView");
+         Service.promptError("Zip Code", request, response, "Update Person", getServletContext().getRequestDispatcher("/updatePerson.jsp"));
       }
       else {
          response.setContentType("text/html");
@@ -34,7 +34,7 @@ public class UpdatePerson extends HttpServlet {
          Person person = (Person) Dao.get(Integer.parseInt(request.getParameter("id")), "Person");
          Name personName = new Name(request.getParameter("first_name"), request.getParameter("middle_name"), request.getParameter("last_name"));
          Address personAddress = new Address(Integer.parseInt(request.getParameter("street_no")), request.getParameter("barangay"), request.getParameter("municipality"), Integer.parseInt(request.getParameter("zip_code")));
-         String[] checkedRoles = request.getParameterValues("roles");
+         String[] checkedRoles = request.getParameterValues("rolesCheckBox");
          person.setName(personName);
          person.setAddress(personAddress);
          person.setGender(("male".equals(request.getParameter("gender").trim()) ? Gender.MALE : Gender.FEMALE));
@@ -64,7 +64,7 @@ public class UpdatePerson extends HttpServlet {
             person.getRoles().clear();
          }
          Dao.update(person);
-         promptSuccess(request, response, "/PersonList");  
+         Service.promptSuccess(request, response, "/listPersons.jsp", "Updated", "Person");
       }
    }
 
@@ -73,12 +73,5 @@ public class UpdatePerson extends HttpServlet {
       RequestDispatcher rd = getServletContext().getRequestDispatcher(url);
       out.println("<font color=red>Invalid " + property + " Input! Please try again.</font><br/>");
       rd.include(request, response);
-   }
-
-   public void promptSuccess(HttpServletRequest request, HttpServletResponse response, String url) throws ServletException, IOException{
-      PrintWriter out= response.getWriter();
-      RequestDispatcher rd = request.getRequestDispatcher(url);
-      out.println("Successfully Updated a Person!</font><br/>");
-      rd.forward(request, response);
    }
 }

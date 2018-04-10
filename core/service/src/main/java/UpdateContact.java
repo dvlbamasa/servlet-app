@@ -3,7 +3,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.WebServlet;
 
-@WebServlet("/UpdateContact")
+@WebServlet("/updateContact")
 public class UpdateContact extends HttpServlet {
 
    public void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -14,6 +14,6 @@ public class UpdateContact extends HttpServlet {
       personContactInformation.setMobileNumber(request.getParameter("mobile_number"));
       personContactInformation.setEmail(request.getParameter("email"));
       Dao.update(personContactInformation);
-      response.sendRedirect("ContactList");
+      Service.promptSuccess(request, response, "/listPersons.jsp", "Updated", "Contact Information");
    }
 }

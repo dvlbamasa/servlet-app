@@ -8,11 +8,11 @@
       <link rel="stylesheet" href="style.css">
    </head>
    <body>
-      <c:if test="${prompt ne null}">
-         <h2><font color=green><c:out value="${prompt}"></c:out></font></h1></h2>
-      </c:if>
       <h1><c:out value="${title}"></c:out></h1><br/>
       <h2>List of Roles</h2>
+      <c:if test="${prompt ne null}">
+         <h2 align="center"><font color=green><c:out value="${prompt}"></c:out></font></h2>
+      </c:if>
       <table id="t01">
          <tr>
             <th>Operation</th>
@@ -23,7 +23,7 @@
          <c:forEach items="${requestScope.roles}" var="role">
             <tr>
                <td> 
-                  <a href="UpdateRoleView?roleId=<c:out value='${role.id}'/>">Update</a><br/>
+                  <a href="updateRoleView?roleId=<c:out value='${role.id}'/>">Update</a><br/>
                </td>
                <td><c:out value="${role.id}"></c:out></td>
                <td><c:out value="${role.name}"></c:out></td>
@@ -36,7 +36,7 @@
          </c:forEach>
       </table>
       <br/>
-      <form action="AddRoleView">
+      <form action="addRoleView">
          <button type="submit">Add Role</button>
       </form><br/><br/>
       <a href="index.html">Back to Homepage</a>

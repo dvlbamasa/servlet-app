@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Collections;
 import javax.servlet.annotation.WebServlet;
 
-@WebServlet("/RoleList")
+@WebServlet("/roleList")
 public class RoleList extends HttpServlet {
 
    public void init() throws ServletException {
@@ -19,6 +19,5 @@ public class RoleList extends HttpServlet {
       request.setAttribute("roles", roles);
       request.setAttribute("title", title);
       request.getRequestDispatcher("listRoles.jsp").forward(request, response);
-
    }
 }
