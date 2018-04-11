@@ -3,15 +3,18 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-	<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
+	<%@ taglib prefix = "fn" uri = "http://java.sun.com/jsp/jstl/functions"%>
 	<head>
       	<title><c:out value="${title}"></c:out></title> 
      	 <link rel="stylesheet" href="style.css">
    	</head>
     <body>
     	<h1><c:out value="${title}"></c:out></h1><br/>
+    	<c:if test="${prompt ne null}">
+         	<font color=red><c:out value="${prompt}"></c:out></font><br/><br/>
+     	</c:if>
     	Please Fill out the New Person Information Form: <br/><br/>
-      	<form action = "updatePerson" method = "GET">
+      	<form action = "updatePerson" method = "POST">
 	        <input type="hidden" name="id" value="<c:out value='${person.id}'/>"/>
 	        First Name:<br/>
 	        <input type = "text" name = "first_name" maxlength="20" value="<c:out value='${person.name.firstName}'/>" required><br/> 

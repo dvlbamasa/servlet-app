@@ -31,8 +31,8 @@ public class Service {
     }
 
     public static void promptError(String property, HttpServletRequest request, HttpServletResponse response, String title, RequestDispatcher requestDispatcher) throws ServletException, IOException{
-        PrintWriter out= response.getWriter();
         RequestDispatcher rd = requestDispatcher;
+        String prompt = "Invalid " + property + " Input! Please try again.";
         List<Role> roles = (List<Role>) Dao.getList("Role");
         if (title.equals("Update Person")) {
             Person person = (Person) Dao.get(Integer.parseInt(request.getParameter("id")), "Person");
@@ -42,8 +42,8 @@ public class Service {
         }
         request.setAttribute("roles", roles);
         request.setAttribute("title", title);
-        out.println("<font color=red>Invalid " + property + " Input! Please try again.</font><br/>");
-        rd.include(request, response);
+        request.setAttribute("prompt", prompt);
+        rd.forward(request, response);
     }
 
 

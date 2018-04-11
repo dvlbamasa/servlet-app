@@ -3,7 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-   <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
+   <%@ taglib prefix = "fn" uri = "http://java.sun.com/jsp/jstl/functions"%>
    <head>
       <title><c:out value="${title}"></c:out></title> 
       <link rel="stylesheet" href="style.css">
@@ -34,19 +34,23 @@
                 <th>First Name</th>                         
                 <th>Middle Name</th>
                 <th>Last Name</th>
-                <th>Gender</th>
-                <th>Birthday</th>
-                <th>GWA</th>
-                <th>Currently Employed</th>
-                <th>Date Hired</th>
-                <th>Street Number</th>
-                <th>Barangay</th>
-                <th>Municipal</th>
-                <th>Zip Code</th>
+                <c:if test="${orderType ne 'contacts'}"> 
+                	<th>Gender</th>
+                	<th>Birthday</th>
+                	<th>GWA</th>
+                	<th>Currently Employed</th>
+                	<th>Date Hired</th>
+                	<th>Street Number</th>
+                	<th>Barangay</th>
+                	<th>Municipal</th>
+                	<th>Zip Code</th>
+                </c:if>	
                 <th>Landline</th>
                 <th>Mobile Number</th>
                 <th>Email</th>
-                <th>Roles</th>
+                <c:if test="${orderType ne 'contacts'}"> 
+                	<th>Roles</th>
+                </c:if>
 			</tr>
 			<c:forEach items="${requestScope.persons}" var="person">
 				<tr>
@@ -73,15 +77,17 @@
 					<td><c:out value="${person.name.firstName}"/></td>
 					<td><c:out value="${person.name.middleName}"/></td>
 					<td><c:out value="${person.name.lastName}"/></td>
-					<td><c:out value="${person.gender}"/></td>
-					<td><c:out value="${fn:substring(person.birthday,0,10)}"/></td>
-					<td><c:out value="${person.gwa}"/></td>
-					<td><c:out value="${person.currentlyEmployed}"/></td>
-					<td><c:out value="${fn:substring(person.dateHired,0,10)}"/></td>
-					<td><c:out value="${person.address.streetNo}"/></td>
-					<td><c:out value="${person.address.barangay}"/></td>
-					<td><c:out value="${person.address.municipality}"/></td>
-					<td><c:out value="${person.address.zipCode}"/></td>
+					<c:if test="${orderType ne 'contacts'}"> 
+						<td><c:out value="${person.gender}"/></td>
+						<td><c:out value="${fn:substring(person.birthday,0,10)}"/></td>
+						<td><c:out value="${person.gwa}"/></td>
+						<td><c:out value="${person.currentlyEmployed}"/></td>
+						<td><c:out value="${fn:substring(person.dateHired,0,10)}"/></td>
+						<td><c:out value="${person.address.streetNo}"/></td>
+						<td><c:out value="${person.address.barangay}"/></td>
+						<td><c:out value="${person.address.municipality}"/></td>
+						<td><c:out value="${person.address.zipCode}"/></td>
+					</c:if>
 					<td> 
 						<c:if test="${person.contactInformation ne null}"> 
 							<c:out value="${person.contactInformation.landline}"/>
@@ -97,11 +103,13 @@
 							<c:out value="${person.contactInformation.email}"/>
 						</c:if>
 					</td>
-					<td>
-						<c:forEach items="${person.roles}" var="role">
-							<c:out value="${role.name }"/>
-						</c:forEach>
-					</td>
+					<c:if test="${orderType ne 'contacts'}"> 
+						<td>
+							<c:forEach items="${person.roles}" var="role">
+								<c:out value="${role.name }"/>
+							</c:forEach>
+						</td>
+					</c:if>
 	           	</tr>
 	        </c:forEach>
 	  	</table><br/>

@@ -13,7 +13,7 @@ public class UpdatePerson extends HttpServlet {
 
    private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.ENGLISH);
 
-   public void doGet(HttpServletRequest request, HttpServletResponse response)
+   public void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
       if (!Util.validateInputDate(request.getParameter("birthday"))) {

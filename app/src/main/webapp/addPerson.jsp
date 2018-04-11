@@ -9,6 +9,9 @@
    	</head>
     <body>
     	<h1><c:out value="${title}"></c:out></h1><br/>
+    	<c:if test="${prompt ne null}">
+         	<font color=red><c:out value="${prompt}"></c:out></font><br/><br/>
+     	</c:if>
     	Please Fill out the Person Information Form: <br/><br/>
       	<form action = "addPerson" method = "POST">
 	        First Name:<br/>
